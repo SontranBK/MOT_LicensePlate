@@ -1,0 +1,31 @@
+Object_detection:
+  model: "yolox" #yolox,yolov5
+Object_tracking:
+  model: "bytetrack" #norfair,bytetrack,motpy,sort
+OCR:
+  model: "Ultra_lightweight_weight_OCR_ONNX"
+
+Kafka:
+  url : localhost:9092
+  topic : ocr_human
+Save: 
+  data_save: "data_image"
+  image_size: 640
+Skip_frame: 1
+Skip_ocr: 3
+
+Url_search: http://0.0.0.0:1212/Deploy/Ver1/Search
+
+CameraDB: 
+  collection_name: 'cameras'
+  database_name: 'ocr_humman'
+  port: 27017
+  host: localhost
+
+CameraKafka:
+  url : localhost:9092
+  topic : camera_status
+
+Camera:
+  limit : 8
+Time_sleep_thread: 5 #s

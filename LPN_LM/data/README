@@ -1,0 +1,8 @@
+Edit : 
+    
+    save_path : data folder(save_path/val and save_path/train)  created after convert
+    
+    data_dir : data polygon (json + image tool : labelme)
+    
+    run : python3 custom_data.py
+

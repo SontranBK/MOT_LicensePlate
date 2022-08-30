@@ -1,0 +1,5 @@
+Object_detection:
+  model: "yolov5" #yolov5,nanodet,yolov4,yolox
+
+Object_tracking:
+  model: "deepsort" #norfair,bytetrack,motpy,sort
