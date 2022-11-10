@@ -1,0 +1,20 @@
+#Usage: pip3 install requirements.txt
+#include
+numpy==1.19.4
+pandas==1.1.5
+opencv-python 
+EasyROI
+Cython
+future
+setuptools==58.3.0
+gdown 
+testresources
+pyyaml
+requests
+matplotlib
+tqdm
+seaborn
+lap
+cython
+cython_bbox
+
