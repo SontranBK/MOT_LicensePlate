@@ -1,75 +1,23 @@
-import cv2
-cv2.namedWindow("frame",cv2.WINDOW_FULLSCREEN)
-import sys
+import cv2;
 
-import numpy as np
-sys.path.insert(0, 'Detection')
-sys.path.insert(0, 'Tracking')
-from Detection.yolov5.detect import Yolov5
-from Tracking.bytetrack import BYTETracker
-from LP_recognition.deploy import main
-detector = Yolov5(list_objects=["bicycle","car","truck","motorcycle"])
-tracker = BYTETracker(track_thresh=0.5, track_buffer=30,
-                            match_thresh=0.8, min_box_area=10, frame_rate=30)
+vid = cv2.VideoCapture("http://admin:Admin@123@14.241.46.213:1880/")
 
-def Detect( detector, frame):
-    box_detects, classes, confs = detector.detect(frame.copy())
-    return np.array(box_detects).astype(int), np.array(confs), np.array(classes)
-cam=cv2.VideoCapture("./data/3m.mp4")
-
-def track(frame,box_detects, scores, classes):
-    data_track = tracker.update(box_detects, scores, classes)
-    for data in data_track:
-        box = data
-        track_id = int(data[4])
-        cls_id = int(data[5])
-        x0 = int(box[0])
-        y0 = int(box[1])
-        x1 = int(box[2])
-        y1 = int(box[3])
-
-        color = (255, 255, 255)
-
-        trace = data[6]
-
-        for pos in trace:
-            frame = cv2.circle(frame, (int(pos[0] + pos[2] / 2), int(pos[1] + pos[3] / 2)), 1, color, 3)
-
-        text = str(track_id)
-        txt_color = (0, 0, 255)
-        font = cv2.FONT_HERSHEY_SIMPLEX
-
-        txt_size = cv2.getTextSize(text, font, 0.6, 1)[0]
-        cv2.rectangle(frame, (x0, y0), (x1, y1), color, 2)
-
-        txt_bk_color = (255, 255, 255)
-        cv2.rectangle(
-        frame,
-        (x0, y0 + 1),
-        (x0 + txt_size[0] + 1, y0 + int(1.5 * txt_size[1])),
-        txt_bk_color,
-        -1
-        )
-        cv2.putText(
-        frame, text, (x0, y0 + txt_size[1]), font, 0.5, txt_color, thickness = 2)
-    return  frame
-
-def plateRecognition(frame, box_detect):
-    for box in box_detect[0:-1][:]:
-        left = box[0]
-        top = box[1]
-        right = box[2]
-        bottom = box[3]
-        Img = frame[top:bottom, left:right]
-        main(Img)
-
-
-while 1:
-    _,frame=cam.read()
-    box_detects, scores, classes = Detect(detector, frame)
-    frame = track(frame, box_detects, scores, classes)
-    plateRecognition(frame, box_detects)
-    cv2.imshow("frame",frame)
-    cv2.waitKey(1)
-    
-     
+while(True):
+      
+    # Capture the video frame
+    # by frame
+    ret, frame = vid.read()
+  
+    # Display the resulting frame
+    cv2.imshow('frame', frame)
+      
+    # the 'q' button is set as the
+    # quitting button you may use any
+    # desired button of your choice
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+  
+# After the loop release the cap object
+vid.release()
+# Destroy all the windows
+cv2.destroyAllWindows()
