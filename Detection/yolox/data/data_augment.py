@@ -15,7 +15,7 @@ import random
 import cv2
 import numpy as np
 
-from yolox.utils import xyxy2cxcywh
+from Detection.yolox.utils import xyxy2cxcywh
 
 
 def augment_hsv(img, hgain=5, sgain=30, vgain=30):

@@ -4,13 +4,17 @@
 import os
 import time
 import cv2
-import torch
-from yolox.data.data_augment import ValTransform
-from yolox.data.datasets import COCO_CLASSES
-from yolox.exp import get_exp
-from yolox.utils import postprocess
-
 import sys
+import torch
+sys.path.insert(0, 'Detection')
+sys.path.insert(0, 'Tracking')
+
+from Detection.yolox.data.data_augment import ValTransform
+from Detection.yolox.data.datasets import COCO_CLASSES
+from Detection.yolox.exp import get_exp
+from Detection.yolox.utils import postprocess
+
+
 path_cur = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, "Detection/yolox")
 
@@ -86,7 +90,6 @@ class YoloX(object):
         clsids = output[:, 6]
         scores = output[:, 4] * output[:, 5]
         for i in range(len(bboxes)):
-          if(int(clsids[i]) in [1,2,3,5,7]):
             box = bboxes[i]
             cls_id = int(clsids[i])
             score = scores[i]

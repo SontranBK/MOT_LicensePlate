@@ -18,9 +18,9 @@ def get_exp_by_file(exp_file):
 
 
 def get_exp_by_name(exp_name):
-    import yolox
+    import Detection.yolox
 
-    yolox_path = os.path.dirname(os.path.dirname(yolox.__file__))
+    yolox_path = os.path.dirname(os.path.dirname(Detection.yolox.__file__))
     filedict = {
         "yolox-s": "yolox_s.py",
         "yolox-m": "yolox_m.py",

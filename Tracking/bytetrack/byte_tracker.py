@@ -13,7 +13,7 @@ from .basetrack import BaseTrack, TrackState
 
 class STrack(BaseTrack):
     shared_kalman = KalmanFilter()
-    def __init__(self, tlwh, score,cls,buffer=5):
+    def __init__(self, tlwh, score,cls):
 
         # wait activate
         self._tlwh = np.asarray(tlwh, dtype=np.float)
@@ -23,8 +23,6 @@ class STrack(BaseTrack):
         self.cls=cls
         self.score = score
         self.tracklet_len = 0
-        self.det = deque(maxlen=buffer)
-        self.det.append(tlwh)
 
     def predict(self):
         mean_state = self.mean.copy()
@@ -73,7 +71,6 @@ class STrack(BaseTrack):
         if new_id:
             self.track_id = self.next_id()
         self.score = new_track.score
-       
 
     def update(self, new_track, frame_id):
         """
@@ -91,8 +88,8 @@ class STrack(BaseTrack):
             self.mean, self.covariance, self.tlwh_to_xyah(new_tlwh))
         self.state = TrackState.Tracked
         self.is_activated = True
+
         self.score = new_track.score
-        self.det.append(new_tlwh)
 
     @property
     # @jit(nopython=True)
@@ -188,7 +185,6 @@ class BYTETracker(object):
             '''Detections'''
             detections = [STrack(STrack.tlbr_to_tlwh(tlbr), s,cls) for
                           (tlbr, s,cls) in zip(dets, scores_keep,classes)]
-            # print("detections : ",detections[0])
         else:
             detections = []
 
@@ -305,7 +301,7 @@ class BYTETracker(object):
             vertical = tlwh[2] / tlwh[3] > 1.6
             if tlwh[2] * tlwh[3] > self.min_box_area and not vertical:
                 x1, y1, w, h = tlwh
-                data_tracks.append([x1,y1,x1+w,y1+h,tid,t.cls,t.det])
+                data_tracks.append([x1,y1,x1+w,y1+h,tid,t.cls])
             
 
         return data_tracks

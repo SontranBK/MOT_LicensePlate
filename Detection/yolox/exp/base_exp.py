@@ -11,7 +11,7 @@ from tabulate import tabulate
 import torch
 from torch.nn import Module
 
-from yolox.utils import LRScheduler
+from Detection.yolox.utils import LRScheduler
 
 
 class BaseExp(metaclass=ABCMeta):

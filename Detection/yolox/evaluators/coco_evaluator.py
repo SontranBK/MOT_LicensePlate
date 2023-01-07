@@ -13,7 +13,7 @@ from tqdm import tqdm
 
 import torch
 
-from yolox.utils import (
+from Detection.yolox.utils import (
     gather,
     is_main_process,
     postprocess,
