@@ -1,76 +1,32 @@
-# ***MOT_LicensePlate*** - an Intelligent Transport System with Multiple object tracking and License Plate detection
+## Getting started
+### Pip
+```bash
+pip install -r requirements.txt
+cd YOLOX
+pip install -v -e .
+```
+### Nvidia Driver
+Make sure to use CUDA Toolkit version 11.2 as it is the proper version for the Torch version used in this repository: https://developer.nvidia.com/cuda-11.2.0-download-archive
 
-## 1. Getting Started
+### torch2trt
+Clone this repository and install: https://github.com/NVIDIA-AI-IOT/torch2trt 
 
-This product features an Intelligent Transport System with Multiple object tracking and License Plate detection. Main functions:
+## Download a pretrained model
+Download pretrained yolox_s.pth file: https://github.com/Megvii-BaseDetection/YOLOX/releases/download/0.1.1rc0/yolox_s.pth
 
-- Multiple object tracking with Re-id support
-- Object counting and area-contour counting
-- License Plate (Vietnam Standard) detection, with text recognition
-- IoT system oriented with Jetson Nano deployment as edged devices
+Copy and paste yolox_s.pth from your downloads folder into the 'YOLOX' folder of this repository.
 
-## 2. Updates and releases!!!
-For all release features and publised product UI, check out [release page](https://github.com/SontranBK/MOT_LicensePlate/releases)
-
-* 【Sep 28, 2022】
-
-## 3. Reproducing this product:
-
-<details>
-<summary> 3.1. Jetson Nano Jetpack flash</summary>
-
-
-</details>
-
-<details>
-<summary> 3.2. Setup enviroments for Jetson Nano</summary>
-
-- Step1. Install the dependencies
-
-```shell
-sudo apt-get install python3-pip libjpeg-dev libopenblas-dev libopenmpi-dev libomp-dev
+## Convert model to TensorRT
+```bash
+python tools/trt.py -n yolox-s -c yolox_s.pth
 ```
 
-- Step2. Install torch and torchvision
-
-```shell
-gdown https://drive.google.com/uc?id=1-XmTOEN0z1_-VVCI3DPwmcdC-eLT_-n3
-gdown https://drive.google.com/uc?id=1BdvXkwUGGTTamM17Io4kkjIT6zgvf4BJ
-sudo -H pip3 install torch-1.8.0a0+37c1f4a-cp36-cp36m-linux_aarch64.whl
-sudo -H pip3 install torchvision-0.9.0a0+01dfa8e-cp36-cp36m-linux_aarch64.whl
-rm torchvision-0.9.0a0+01dfa8e-cp36-cp36m-linux_aarch64.whl
-rm torch-1.8.0a0+37c1f4a-cp36-cp36m-linux_aarch64.whl
+## Runing with YOLOX-s
+```bash
+python detector.py
 ```
 
-- Step3. Installing
+## References
+- [YOLOX](https://github.com/Megvii-BaseDetection/YOLOX)
+- [ByteTrack](https://github.com/ifzhang/ByteTrack)
 
-```shell
-git clone https://github.com/SontranBK/MOT_LicensePlate.git
-pip3 install requirements.txt
-```
-
-- Step4. 
-
-</details>
-
-
-## 4. Developer guide
-
-<details>
-<summary> 4.1. Programming language:</summary>
-
-- This product is written mainly in Python language
-
-
-</details>
-
-
-<details>
-<summary> 4.2. Deps and source code architecture:</summary>
-
- - List of dependencies:
-
-    - [Minh huy fill in here]
-    - [Minh huy fill in here]
-    - [Minh huy fill in here]
-</details>
