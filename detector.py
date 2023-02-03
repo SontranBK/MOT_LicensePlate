@@ -164,8 +164,9 @@ if __name__=='__main__':
             online_targets = tracker.update(outputs[0], [img_info['height'], img_info['width']], exp.test_size, filter_class)
 
             # draw line for couting object
-            line = [(0, int(0.1 * im.shape[0])), (int(im.shape[1]), int(0.1 * im.shape[0]))]
+            #line = [(0, int(0.1 * im.shape[0])), (int(im.shape[1]), int(0.1 * im.shape[0]))]
             # line = [(0, 0), (int(im.shape[1]), int(im.shape[0]))]
+            line = [(186, 622), (211, 270)]
             cv2.line(im, line[0], line[1], (0, 255, 0), 2)
 
             online_tlwhs = []
