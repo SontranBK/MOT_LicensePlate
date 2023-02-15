@@ -1,7 +1,7 @@
 from ast import arg
 from collections import deque
 import sys
-from venv import create
+
 
 sys.path.insert(0, 'YOLOX')
 import torch
@@ -131,8 +131,9 @@ if __name__=='__main__':
     tracker = BYTETracker(args, frame_rate=22)
     exp = get_exp_by_name(args.name)
 
-    cap = cv2.VideoCapture("rtsp://admin:Admin@123@27.72.149.50:1554/profile3/media.smp") # open one video
-    # cap = cv2.VideoCapture("3m.mp4")
+    # cap = cv2.VideoCapture("rtsp://admin:Admin@123@27.72.149.50:1554/profile3/media.smp")
+    # open one video
+    cap = cv2.VideoCapture("C:/D/download/3m.mp4")
     # used to record the time when we processed last frame
     prev_frame_time = 0
     # used to record the time at which we processed current frame
